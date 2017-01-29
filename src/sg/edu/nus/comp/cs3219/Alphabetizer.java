@@ -1,16 +1,28 @@
 package sg.edu.nus.comp.cs3219;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * Created by kfwong on 1/28/17.
  */
-public class Alphabetizer implements Filter<List<String>>  {
+public class Alphabetizer extends Filter<String, SortedSet<String>> {
+
+    private SortedSet<String> sortedSet = new TreeSet<>();
+
+    public Alphabetizer(Pipe<String> in, Pipe<SortedSet<String>> out) {
+        super(in, out);
+    }
 
     @Override
-    public List<String> execute(List<String> data) {
-        Collections.sort(data);
-        return data;
+    public synchronized void filter() {
+        if(!inPipe.buffer.isEmpty()){
+            String s = inPipe.pull();
+            sortedSet.add(s);
+
+            outPipe.push(new TreeSet<>(sortedSet));
+        }
+
     }
+
 }

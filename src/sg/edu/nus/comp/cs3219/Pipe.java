@@ -1,46 +1,27 @@
 package sg.edu.nus.comp.cs3219;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- * Created by kfwong on 1/27/17.
+ * Created by kfwong on 1/28/17.
  */
-public class Pipe {
-    private List<Filter<List<String>>> filters;
-    private DataSource dataSource;
-    private DataSink dataSink;
+public class Pipe<T> {
+
+    protected ConcurrentLinkedQueue<T> buffer;
 
     public Pipe(){
-        this.filters = new ArrayList<>();
+        buffer = new ConcurrentLinkedQueue<>();
     }
 
-    public Pipe registerDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-
-        return this;
+    protected synchronized void push(T input){
+        buffer.offer(input);
     }
 
-    public Pipe registerDataSink(DataSink dataSink) {
-        this.dataSink = dataSink;
-
-        return this;
+    protected synchronized T pull(){
+        return buffer.poll();
     }
 
-    public Pipe registerFilter(Filter filter) {
-        this.filters.add(filter);
-
-        return this;
+    protected synchronized T peek(){
+        return buffer.peek();
     }
-
-    public void run() {
-        dataSource.read();
-
-        filters.stream().forEachOrdered(f -> {
-            dataSource.setData(f.execute(dataSource.getData()));
-        });
-
-        dataSink.output(dataSource.getData());
-    }
-
 }

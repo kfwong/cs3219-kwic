@@ -1,35 +1,36 @@
 package sg.edu.nus.comp.cs3219;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 /**
  * Created by kfwong on 1/27/17.
  */
-public class DataSource {
+public class DataSource implements Runnable {
 
-    private List<String> data;
+    private Scanner sc;
 
-    public DataSource(){
-        this.data = new ArrayList<>();
+    protected Pipe<String> outPipe;
+
+    public DataSource(Pipe<String> out) {
+        this.outPipe = out;
+        this.sc = new Scanner(System.in);
     }
 
-    protected void read(){
-        Scanner sc = new Scanner(System.in);
+    protected synchronized void read() {
+        outPipe.push(sc.nextLine());
 
-        // Ctrl + D
+        // TODO: bad static dependency, for testing purpose only should be removed
+        Pipeline.startTime = System.nanoTime();
+    }
+
+    @Override
+    public void run() {
         while(sc.hasNext()){
-            data.add(sc.nextLine());
+            read();
         }
-    }
 
-    public List<String> getData() {
-        return data;
-    }
+        System.out.println("Closing application...Bye!");
 
-    public void setData(List<String> data) {
-        this.data = new ArrayList<>(data);
+        System.exit(0);
     }
 }

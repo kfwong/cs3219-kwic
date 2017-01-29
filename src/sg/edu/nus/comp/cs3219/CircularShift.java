@@ -1,36 +1,38 @@
 package sg.edu.nus.comp.cs3219;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by kfwong on 1/27/17.
  */
-public class CircularShift implements Filter<List<String>> {
+public class CircularShift extends Filter<String, String> {
 
     public static String[] STOP_WORDS = {
             "is", "the", "of", "and", "as", "a", "after"
     };
 
-    @Override
-    public List<String> execute(List<String> data) {
-        List<String> result = new ArrayList<>();
+    public CircularShift(Pipe<String> in, Pipe<String> out) {
+        super(in, out);
+    }
 
-        data.forEach(d -> {
-            String[] words = extractWords(d);
+    @Override
+    public synchronized void filter() {
+        if (!inPipe.buffer.isEmpty()) {
+
+            String sentence = inPipe.pull();
+
+            String[] words = extractWords(sentence);
             for (int i = 0; i < words.length; i++) {
                 String firstWord = words[0];
                 if (!isStopWord(firstWord)) {
                     String shiftedSentence = String.join(" ", words);
-                    result.add(shiftedSentence);
+                    outPipe.push(shiftedSentence);
                 }
 
                 String[] shiftedWords = leftShift(words);
                 System.arraycopy(shiftedWords, 0, words, 0, shiftedWords.length);
             }
-        });
 
-        return result;
+        }
+
     }
 
     private String[] leftShift(String[] s) {
@@ -38,8 +40,8 @@ public class CircularShift implements Filter<List<String>> {
         String[] shiftedWords = new String[s.length];
 
         if (s.length > 1) {
-            System.arraycopy(s, 1, shiftedWords, 0, s.length-1);
-            System.arraycopy(s, 0, shiftedWords, shiftedWords.length-1, 1);
+            System.arraycopy(s, 1, shiftedWords, 0, s.length - 1);
+            System.arraycopy(s, 0, shiftedWords, shiftedWords.length - 1, 1);
         }
 
         return shiftedWords;
