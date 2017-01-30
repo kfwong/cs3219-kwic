@@ -41,6 +41,6 @@ public class Kwic {
 
         System.out.println("\nKeyword in Context v0.1\nPipe & Filter Version\nWritten by @kfwong (https://github.com/kfwong)\n");
 
-        System.out.println("#########################################\r\n#\tInput titles in each line.\t\t\t#\r\n#\tPress [ENTER] to input more lines.\t#\n#\tPress [CTRL+D] when you're done.\t#\r\n#########################################");
+        System.out.println("#########################################\r\nInput titles in each line.\t\t\t\r\nPress [ENTER] to input more lines.\nPress [CTRL+D] when you're done.\r\n#########################################");
     }
 }
