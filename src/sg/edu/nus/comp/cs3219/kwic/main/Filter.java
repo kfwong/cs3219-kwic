@@ -1,4 +1,4 @@
-package sg.edu.nus.comp.cs3219;
+package sg.edu.nus.comp.cs3219.kwic.main;
 
 /**
  * Created by kfwong on 1/27/17.

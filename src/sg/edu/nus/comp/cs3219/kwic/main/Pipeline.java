@@ -1,4 +1,4 @@
-package sg.edu.nus.comp.cs3219;
+package sg.edu.nus.comp.cs3219.kwic.main;
 
 import java.util.ArrayList;
 import java.util.List;

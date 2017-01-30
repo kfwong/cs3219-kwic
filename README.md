@@ -198,8 +198,9 @@ consists of the entries from [Project Gutenberg's Fifteen Thousand Useful
 Phrases, by Greenville
 Kleiser](http://www.gutenberg.org/cache/epub/18362/pg18362.txt).
 
-| Number of entries | Minimum phrases per entries | Maximum phrases per entries | Processing TIme (seconds) |
-| ----------------- | --------------------------- | --------------------------- | ------------------------- |
-| 500               | 2                           | 2                           | 1                         |
-| 1000              | 2                           | 2                           | 4.2                       |
-| 2000              | 4                           | 10                          | 19                        |
+| Number of entries | Minimum phrases per entries | Processing TIme (seconds) |
+| ----------------- | --------------------------- | ------------------------- |
+| 500               | 2                           | 1                         |
+| 1000              | 2                           | 4.2                       |
+| 500               | 4-10                        | 10.8                      |
+| 1000              | 4-10                        | 37.4                      |
