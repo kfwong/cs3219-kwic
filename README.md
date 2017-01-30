@@ -1,5 +1,7 @@
 # CS3219 Assignment 1 Report: Keyword in Context (KWIC)
 
+![demo](https://cdn.rawgit.com/kfwong/cs3219-kwic/a689ef2b/gif/demo.gif)
+
 Code Repository URL:
 [https://github.com/kfwong/cs3219-kwic](https://github.com/kfwong/cs3219-kwic)
 
