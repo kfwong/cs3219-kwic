@@ -1,23 +1,25 @@
 package sg.edu.nus.comp.cs3219.kwic.main;
 
+import java.util.Arrays;
 import java.util.SortedSet;
+import java.util.stream.Collectors;
 
 public class Kwic {
 
     public static void main(String[] args) {
 
-        printHeader();
+        printHeader(args);
 
-        new Kwic();
+        new Kwic(args);
     }
 
-    public Kwic(){
+    public Kwic(String... stopWords){
         Pipe<String> p1 = new Pipe<>();
         Pipe<String> p2 = new Pipe<>();
         Pipe<SortedSet<String>> p3 = new Pipe<>();
 
         DataSource dataSource = new DataSource(p1);
-        Filter circularShift = new CircularShift(p1, p2);
+        Filter circularShift = new CircularShift(p1, p2, stopWords);
         Filter alphabetizer = new Alphabetizer(p2, p3);
         DataSink dataSink = new DataSink(p3);
 
@@ -29,7 +31,7 @@ public class Kwic {
                 .run();
     }
 
-    private static void printHeader(){
+    private static void printHeader(String... stopWords){
         System.out.println(
                         "██╗  ██╗   ██╗    ██╗   ██╗    ██████╗\n" +
                         "██║ ██╔╝   ██║    ██║   ██║   ██╔════╝\n" +
@@ -41,6 +43,16 @@ public class Kwic {
 
         System.out.println("\nKeyword in Context v0.1\nPipe & Filter Version\nWritten by @kfwong (https://github.com/kfwong)\n");
 
-        System.out.println("#########################################\r\nInput titles in each line.\t\t\t\r\nPress [ENTER] to input more lines.\nPress [CTRL+D] when you're done.\r\n#########################################");
+        System.out.println("#########################################");
+
+        System.out.println("Input titles in each line.");
+
+        System.out.println("Press [ENTER] to input more lines.");
+
+        System.out.println("Press [CTRL+D] when you're done.");
+
+        System.out.println("Ignoring words: ["+ Arrays.stream(stopWords).collect(Collectors.joining(", "))+"]");
+
+        System.out.println("#########################################");
     }
 }

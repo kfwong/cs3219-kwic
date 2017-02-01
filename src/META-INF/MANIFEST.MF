@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: sg.edu.nus.comp.cs3219.kwic.main.Kwic
+

@@ -5,12 +5,11 @@ package sg.edu.nus.comp.cs3219.kwic.main;
  */
 public class CircularShift extends Filter<String, String> {
 
-    public static String[] STOP_WORDS = {
-            "is", "the", "of", "and", "as", "a", "after"
-    };
+    public final String[] STOP_WORDS;
 
-    public CircularShift(Pipe<String> in, Pipe<String> out) {
+    public CircularShift(Pipe<String> in, Pipe<String> out, String... stopWords) {
         super(in, out);
+        this.STOP_WORDS = stopWords;
     }
 
     @Override

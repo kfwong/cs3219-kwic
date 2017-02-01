@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="cs3219-assignment-1:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/cs3219_assignment_1_jar</output-path>
+    <root id="archive" name="cs3219-assignment-1.jar">
+      <element id="module-output" name="cs3219-assignment-1" />
+    </root>
+  </artifact>
+</component>
