@@ -12,6 +12,21 @@ KWIC (Key Word In Context) index system provides a search mechanism for
 information in a long list of lines, such as movie titles. Our team explored
 **Pipe & Filter** and xxxx and implemented these design in our program.
 
+## Installation & Usage
+- Dowload the pre-release here: 
+https://github.com/kfwong/cs3219-kwic/releases/download/v0.1-alpha/kwic_A0138862W.jar
+
+- Run the jar file. You can specify optional ignore words as parameters
+```bash
+// format: java -jar <filename>.jar <ignore words>...
+> java -jar kwic_A0138862W.jar is the of and after
+```
+
+- Type inyour sentences line by line or copy & paste in bulk. The result will 
+be output to the console.
+
+- Press <kbd>CTRL + D</kbd> to exit the application.
+
 ## Requirements
 ### Functional
 - The program should be able to display a list of KWIC to user.
